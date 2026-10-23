@@ -1,0 +1,15 @@
+type,count,scope
+ActivationRatio,6,source_supported
+ElectrochemicalTest,375,source_supported
+Evidence,24227,source_supported
+InputAmount,373,source_supported
+Material,25721,source_supported
+MaterialAlias,1088,source_supported
+Measurement,1125,source_supported
+Paper,5728,source_supported
+PropertyType,21,source_supported
+ScientificFact,4203,source_supported
+Substance,3594,source_supported
+SynthesisCondition,39,source_supported
+SynthesisInput,18,source_supported
+SynthesisStep,344,source_supported

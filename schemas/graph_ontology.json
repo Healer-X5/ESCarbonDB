@@ -1,0 +1,281 @@
+{
+  "version": "carbon_evidence_kg_2.0",
+  "node_types": [
+    {
+      "node_type": "ActivationRatio",
+      "meaning": "活化剂/分母质量比，保留原料或预炭化阶段",
+      "identifier": "ActivationRatio:ratio_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "ElectrochemicalTest",
+      "meaning": "与明确 fact_id 对应的测试条件；重复源 test_id 使用事实域区分",
+      "identifier": "ElectrochemicalTest:test_id[:fact_id]",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status"
+    },
+    {
+      "node_type": "Evidence",
+      "meaning": "原文引用、页码、块 ID、源文件和可用源哈希",
+      "identifier": "Evidence:evidence_id；新增来源引用为作用域内确定性散列",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "InputAmount",
+      "meaning": "一个明确角色的投入量；质量、体积、摩尔量及浓度分开",
+      "identifier": "InputAmount:amount_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "Material",
+      "meaning": "一个论文内提取的特定样本、对照或中间材料；不跨论文合并",
+      "identifier": "Material:paper_id:material_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "MaterialAlias",
+      "meaning": "论文和样品域别名；不合并样品",
+      "identifier": "MaterialAlias:alias_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status"
+    },
+    {
+      "node_type": "Measurement",
+      "meaning": "V3 原始测量记录；候选身份独立保存，不将未归属表追加",
+      "identifier": "Measurement:measurement_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "Paper",
+      "meaning": "原始出版物和本地论文注册身份；DOI 保留本地验证状态",
+      "identifier": "Paper:paper_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "PropertyType",
+      "meaning": "规范化的科学属性概念",
+      "identifier": "PropertyType:规范字段名",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "ScientificFact",
+      "meaning": "目标事实、定向恢复或同一源观察的详细表示",
+      "identifier": "ScientificFact:fact_id；恢复 ID 基于来源和事实身份散列",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "Substance",
+      "meaning": "共享的规范化化学/前驱体概念；化学角色由关系决定",
+      "identifier": "规范名称散列；保留原文名称",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    },
+    {
+      "node_type": "SynthesisCondition",
+      "meaning": "明确工艺步骤的温度、时长和气氛",
+      "identifier": "SynthesisCondition:condition_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status"
+    },
+    {
+      "node_type": "SynthesisInput",
+      "meaning": "V4 明确样品族配方投入与化学角色",
+      "identifier": "SynthesisInput:input_id",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status"
+    },
+    {
+      "node_type": "SynthesisStep",
+      "meaning": "有明确工艺及条件支持的实际制备操作；不把文本块直接视为工艺",
+      "identifier": "论文、样本、操作及源位置散列",
+      "required_properties": "id,type,paper_id,material_id,source_table,source_record_id,tier,source_supported,v4_curated,strict_ready,v4_status",
+      "missing_behavior": "Keep explicit missing fields; do not infer scientific values"
+    }
+  ],
+  "edge_types": [
+    {
+      "relationship_type": "ABOUT_SUBSTANCE",
+      "source_types": "ScientificFact",
+      "target_types": "Substance"
+    },
+    {
+      "relationship_type": "CARBONIZATION_AND_TEMPLATE_REMOVAL",
+      "source_types": "Material",
+      "target_types": "Material"
+    },
+    {
+      "relationship_type": "CORROBORATES",
+      "source_types": "ScientificFact",
+      "target_types": "ScientificFact,Measurement"
+    },
+    {
+      "relationship_type": "DENOMINATOR_AMOUNT",
+      "source_types": "ActivationRatio",
+      "target_types": "InputAmount"
+    },
+    {
+      "relationship_type": "DERIVED_FROM",
+      "source_types": "ScientificFact",
+      "target_types": "Measurement,InputAmount,ActivationRatio"
+    },
+    {
+      "relationship_type": "DESCRIBES_PROPERTY",
+      "source_types": "ScientificFact",
+      "target_types": "PropertyType"
+    },
+    {
+      "relationship_type": "DUPLICATE_OF",
+      "source_types": "Measurement",
+      "target_types": "Measurement"
+    },
+    {
+      "relationship_type": "FROM_PAPER",
+      "source_types": "Evidence",
+      "target_types": "Paper"
+    },
+    {
+      "relationship_type": "HAS_ACTIVATION_RATIO",
+      "source_types": "Material",
+      "target_types": "ActivationRatio"
+    },
+    {
+      "relationship_type": "HAS_ALIAS",
+      "source_types": "Material",
+      "target_types": "MaterialAlias"
+    },
+    {
+      "relationship_type": "HAS_CONDITION",
+      "source_types": "SynthesisStep",
+      "target_types": "ScientificFact,SynthesisCondition"
+    },
+    {
+      "relationship_type": "HAS_FACT",
+      "source_types": "Material",
+      "target_types": "ScientificFact"
+    },
+    {
+      "relationship_type": "HAS_INPUT",
+      "source_types": "SynthesisStep",
+      "target_types": "SynthesisInput"
+    },
+    {
+      "relationship_type": "HAS_INPUT_AMOUNT",
+      "source_types": "Material",
+      "target_types": "InputAmount"
+    },
+    {
+      "relationship_type": "HAS_MEASUREMENT",
+      "source_types": "Material",
+      "target_types": "Measurement"
+    },
+    {
+      "relationship_type": "HAS_RECIPE_FACT",
+      "source_types": "SynthesisStep",
+      "target_types": "ScientificFact"
+    },
+    {
+      "relationship_type": "HAS_RECIPE_RATIO",
+      "source_types": "Material",
+      "target_types": "ScientificFact"
+    },
+    {
+      "relationship_type": "INPUT_TO_TRANSFORMATION",
+      "source_types": "Material",
+      "target_types": "SynthesisStep"
+    },
+    {
+      "relationship_type": "MEASURES_PROPERTY",
+      "source_types": "Measurement",
+      "target_types": "PropertyType"
+    },
+    {
+      "relationship_type": "NUMERATOR_AMOUNT",
+      "source_types": "ActivationRatio",
+      "target_types": "InputAmount"
+    },
+    {
+      "relationship_type": "PREPARED_BY",
+      "source_types": "Material",
+      "target_types": "SynthesisStep"
+    },
+    {
+      "relationship_type": "REPORTS_FACT",
+      "source_types": "Paper",
+      "target_types": "ScientificFact"
+    },
+    {
+      "relationship_type": "REPORTS_INPUT_AMOUNT",
+      "source_types": "Paper",
+      "target_types": "InputAmount"
+    },
+    {
+      "relationship_type": "REPORTS_MATERIAL",
+      "source_types": "Paper",
+      "target_types": "Material"
+    },
+    {
+      "relationship_type": "REPORTS_MEASUREMENT",
+      "source_types": "Paper",
+      "target_types": "Measurement"
+    },
+    {
+      "relationship_type": "REPORTS_RATIO",
+      "source_types": "Paper",
+      "target_types": "ActivationRatio"
+    },
+    {
+      "relationship_type": "SUPPORTED_BY",
+      "source_types": "ActivationRatio,InputAmount,MaterialAlias,Measurement,ScientificFact,SynthesisStep,ElectrochemicalTest,Material,SynthesisCondition,SynthesisInput",
+      "target_types": "Evidence"
+    },
+    {
+      "relationship_type": "TESTED_UNDER",
+      "source_types": "ScientificFact",
+      "target_types": "ElectrochemicalTest"
+    },
+    {
+      "relationship_type": "USES_ACTIVATOR",
+      "source_types": "Material",
+      "target_types": "Substance"
+    },
+    {
+      "relationship_type": "USES_PRECURSOR",
+      "source_types": "Material",
+      "target_types": "Substance"
+    },
+    {
+      "relationship_type": "USES_TEMPLATE_AND_IN_SITU_AGENT",
+      "source_types": "Material",
+      "target_types": "Substance"
+    }
+  ],
+  "quality_tiers": {
+    "A": "Independent high-confidence scientific certification; no records assigned in this build",
+    "B": "Evidence-supported automatic/source-inspected record; never human-expert verified",
+    "C": "Candidate/incomplete source or attribution; exploratory only",
+    "D": "Rejected chemical role or inappropriate scientific use; audit retention, no direct admitted role edge"
+  },
+  "analysis_ready_scaffold": "All source Paper/Material identities are retained; only admitted scientific nodes and relations are analysis-ready",
+  "identities": "Materials and aliases are strictly paper-scoped. Substance normalization never merges material instances. Measurement IDs are preserved.",
+  "synthesis": "V4 explicit transformations only; legacy partial operations retained when independently supported; operation and family scope remain explicit",
+  "deduplication": "Explicit source_measurement_id and exact same paper, sample, role, evidence and original quantity/ratio identity create DERIVED_FROM links. CORROBORATES supplies added source/test context and does not create another independent observation. Equal numerical values alone are never merged.",
+  "missing_values": "Blank/unknown retained; no confidence probabilities or inferred masses, yields, temperatures, configurations or electrolytes.",
+  "parent_version": "carbon_evidence_kg_1.0",
+  "quality_axes": {
+    "source_version": "v4.1.4",
+    "human_expert_verified": 0,
+    "stable_node_identity": "All KG1 IDs retained; paper-scoped material keys; aliases never merge samples",
+    "source_supported": "KG1 independent admitted source checks OR V4 AUTO_PDF_CONFIRMED, minus explicit V4 quarantine/conflicting operations",
+    "strict_ready": "Membership in authoritative Analysis_Ready, only the 175 canonical V4 fact representations",
+    "v4_curated": "Membership in authoritative Curated_Facts, 776 fact representations",
+    "analysis_ready": "Legacy independently admitted eligibility retained when unaddressed; explicit V4 records inherit V4 strict eligibility. Use task views for pooling.",
+    "observations": "Explicit pointers and equal paper, material, canonical property, value, unit and no conflicting known protocol/recipe; equal numbers alone do not merge",
+    "ratio_policy": "ZnO/Gelatin recipe direction, RAW_PRECURSOR denominator, dual template/in-situ role and exact synthesis-step scope retained",
+    "legacy_wide_material_columns": "V3 summaries; canonical observations and task views are authoritative for KG2 analyses"
+  },
+  "scope": "Complete candidate graph ontology; counts are omitted here. Public source_supported counts are in KnowledgeGraph/node_types.csv and edge_types.csv."
+}

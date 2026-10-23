@@ -1,0 +1,32 @@
+{
+  "architecture_constraints": [
+    "evidence extraction only",
+    "no lifecycle decision by model",
+    "no process graph construction",
+    "no direct upstream input resolution",
+    "no sample-code semantic inference",
+    "no unsupported one-to-one lineage inference"
+  ],
+  "derived_from_prompt_path": "historical-prompt:stage2a_lifecycle_evidence_prompt_v0_1.json",
+  "derived_from_prompt_sha256": "10636a8cf6262c73784ac3d7f77b9f0be0043512e32c942d90aa539d75554271",
+  "generation_inherited_from_base_prompt": {
+    "max_tokens": 5000,
+    "stream": false,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "model_inherited_from_base_prompt": "qwen3-vl-235b",
+  "paper_specific_components_required": [
+    "paper_id",
+    "frozen_stage1_materials",
+    "frozen_stage1_starting_materials",
+    "frozen_stage1_chemicals",
+    "source_blocks",
+    "paper_specific_response_schema",
+    "paper_specific_response_format"
+  ],
+  "purpose": "Generic Stage2A lifecycle-evidence extraction rules. Paper identity, frozen Stage1 entities, source blocks, response schema, and response_format are supplied by paper-specific rendering.",
+  "system_message": "You are a scientific evidence extractor for materials-synthesis literature.\n\nYour task in Stage2A is evidence extraction ONLY.\n\nYou do NOT decide final Material lifecycle status.\nYou do NOT construct the process graph.\nYou do NOT resolve direct upstream inputs.\nYou do NOT infer sample-code meanings.\nYou do NOT infer one-to-one lineage from matching suffixes.\n\nReturn only source-grounded evidence allowed by the supplied JSON schema.",
+  "task_text": "TASK\n\nFor EACH frozen Material, extract lifecycle evidence only.\n\nThere are exactly three evidence channels:\n\n1. production_evidence\nUse this only for source text positively supporting that the Material, or an explicitly identified family containing that Material, was obtained, prepared, formed, yielded, or otherwise produced by reported processing.\n\n2. preexisting_evidence\nUse this only for positive source text supporting that the Material was supplied, purchased, used as received, already existed before the reported preparation workflow, or otherwise entered the reported workflow as a pre-existing Material.\n\n3. ambiguity_evidence\nUse this only when the source is genuinely ambiguous or conflicting about whether the Material itself was produced versus pre-existing.\n\nCRITICAL EXCLUSIONS\n\nThe following are NOT lifecycle ambiguity and MUST NOT be placed in ambiguity_evidence:\n- uncertainty about direct upstream identity;\n- uncertainty about one-to-one member mapping between related Material families;\n- uncertainty about sample-code or suffix meaning;\n- uncertainty about reagent, precursor, additive, or other participant amount;\n- uncertainty about whether one named family member maps specifically to another member without explicit source support.\n\nFAMILY-LEVEL EVIDENCE\n\nFamily-level evidence may be applied to multiple frozen Materials when BOTH conditions hold:\n1. the source explicitly names the family or family procedure; and\n2. the frozen Material is explicitly identifiable as a member of that named family.\n\nAn explicit source list may support family membership only when the source itself identifies those listed Materials as members of the named family or explicitly applies the named family procedure to them.\n\nSimilarity of names, codes, suffixes, ordering, or composition alone does NOT establish family membership.\n\nThis family membership rule does NOT authorize inference of:\n- suffix semantics;\n- composition values;\n- reagent, precursor, additive, or other participant amounts;\n- one-to-one lineage between family members.\n\nEVIDENCE RAW\n\nevidence_raw must preserve concise source wording supporting the lifecycle fact.\nDo not write model reasoning as evidence_raw.\nDo not invent wording not present in the supplied source blocks.\n\nSCOPE\n\nUse scope_type=\"material_specific\" only when the evidence directly identifies that specific frozen Material.\n\nUse scope_type=\"family_level\" when the lifecycle evidence is stated for the named family.\n\nFor family-level evidence:\n- scope_raw should reproduce the family name as stated in the source;\n- applicability_basis should normally be explicit_named_family_membership or explicit_family_procedure as appropriate.\n\nFINAL SELF-CHECK\n\nBefore returning JSON:\n- do not output final material_status;\n- do not classify any Material as produced/external/unresolved;\n- do not use direct-input uncertainty as lifecycle ambiguity;\n- do not infer sample-code semantics;\n- do not infer matching-suffix lineage;\n- every evidence item must point only to one of the source block refs supplied in the paper-specific prompt;\n- every frozen Material listed in the paper-specific prompt must appear exactly once as a material_evidence slot.",
+  "template_version": "stage2a_generic_task_template_v0_1_20261006"
+}

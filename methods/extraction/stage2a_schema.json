@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Generalized release lifecycle evidence structural contract",
+  "description": "Release adaptation of the actual per-paper production contract. Paper/material/source-block allowlists must be instantiated and validated separately before inference. No sample identities are inferred.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "paper_id",
+    "material_evidence"
+  ],
+  "properties": {
+    "paper_id": {
+      "type": "string",
+      "pattern": "^PCSC_[0-9]{6}$"
+    },
+    "material_evidence": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "ambiguity_evidence": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "applicability_basis": {
+                  "enum": [
+                    "explicit_material_mention",
+                    "explicit_named_family_membership",
+                    "explicit_family_procedure"
+                  ],
+                  "type": "string"
+                },
+                "evidence_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "evidence_ref": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Must belong to the source block allowlist supplied for the same paper."
+                },
+                "scope_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "scope_type": {
+                  "enum": [
+                    "material_specific",
+                    "family_level"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "evidence_ref",
+                "evidence_raw",
+                "scope_type",
+                "scope_raw",
+                "applicability_basis"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "preexisting_evidence": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "applicability_basis": {
+                  "enum": [
+                    "explicit_material_mention",
+                    "explicit_named_family_membership",
+                    "explicit_family_procedure"
+                  ],
+                  "type": "string"
+                },
+                "evidence_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "evidence_ref": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Must belong to the source block allowlist supplied for the same paper."
+                },
+                "scope_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "scope_type": {
+                  "enum": [
+                    "material_specific",
+                    "family_level"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "evidence_ref",
+                "evidence_raw",
+                "scope_type",
+                "scope_raw",
+                "applicability_basis"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "production_evidence": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "applicability_basis": {
+                  "enum": [
+                    "explicit_material_mention",
+                    "explicit_named_family_membership",
+                    "explicit_family_procedure"
+                  ],
+                  "type": "string"
+                },
+                "evidence_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "evidence_ref": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Must belong to the source block allowlist supplied for the same paper."
+                },
+                "scope_raw": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "scope_type": {
+                  "enum": [
+                    "material_specific",
+                    "family_level"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "evidence_ref",
+                "evidence_raw",
+                "scope_type",
+                "scope_raw",
+                "applicability_basis"
+              ],
+              "type": "object",
+              "description": "Evidence structure preserved from the frozen lifecycle source contract."
+            },
+            "type": "array"
+          },
+          "stage1_material_ref": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Must equal the material_evidence object key and be present in caller-supplied frozen materials."
+          }
+        },
+        "required": [
+          "stage1_material_ref",
+          "production_evidence",
+          "preexisting_evidence",
+          "ambiguity_evidence"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}

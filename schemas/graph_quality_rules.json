@@ -1,0 +1,12 @@
+{
+  "source_version": "v4.1.4",
+  "human_expert_verified": 0,
+  "stable_node_identity": "All KG1 IDs retained; paper-scoped material keys; aliases never merge samples",
+  "source_supported": "KG1 independent admitted source checks OR V4 AUTO_PDF_CONFIRMED, minus explicit V4 quarantine/conflicting operations",
+  "strict_ready": "Membership in authoritative Analysis_Ready, only the 175 canonical V4 fact representations",
+  "v4_curated": "Membership in authoritative Curated_Facts, 776 fact representations",
+  "analysis_ready": "Legacy independently admitted eligibility retained when unaddressed; explicit V4 records inherit V4 strict eligibility. Use task views for pooling.",
+  "observations": "Explicit pointers and equal paper, material, canonical property, value, unit and no conflicting known protocol/recipe; equal numbers alone do not merge",
+  "ratio_policy": "ZnO/Gelatin recipe direction, RAW_PRECURSOR denominator, dual template/in-situ role and exact synthesis-step scope retained",
+  "legacy_wide_material_columns": "V3 summaries; canonical observations and task views are authoritative for KG2 analyses"
+}

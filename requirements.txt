@@ -1,0 +1,9 @@
+# Tested with Python 3.13.5.
+openpyxl==3.1.5
+networkx==3.4.2
+# NumPy is used by pandas and NetworkX GraphML numeric-type handling.
+numpy==2.1.3
+pandas==2.2.3
+requests==2.32.3
+jsonschema==4.23.0
+PyMuPDF==1.26.6

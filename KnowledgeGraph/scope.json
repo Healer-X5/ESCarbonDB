@@ -1,0 +1,13 @@
+{
+  "scope": "source_supported",
+  "counts": {
+    "nodes": 66862,
+    "edges": 130907
+  },
+  "source_version": "v4.1.4",
+  "human_expert_verified": 0,
+  "semantics": "Automated source-supported scientific core with supporting evidence, identities and explicit recipe context. Supporting nodes are not additional experiments.",
+  "locators": "source-record:PAPER_ID:pdf is an identifier, not a bundled resource. Resolve paper_id using ESCarbonDB:Papers.",
+  "full_graph": "The complete SQLite candidate graph is excluded; no public deposit is asserted.",
+  "formats": "Canonical UTF-8 CSV node/edge tables; generate GraphML using scripts/escarbon.py graphml."
+}
